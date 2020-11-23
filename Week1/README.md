@@ -1,14 +1,14 @@
 ## 心得体会
-1.注意中间状态和最终状态的关系，如果能直接到达最终状态显然可以极大的降低算法的成本。比如直接推导出通项公式。
-2.对于暴力算法复杂度超过$O(n^2)$的题目，可以考虑是否可以先排序，因为排序的时间复杂度为O$(nlogn)$。
-3.动态规划其实是一种高级暴力算法，遇到暴力算法时间复杂度较高时候第一时间想到的就应该是有没有重复计算，能不能记忆化，能不能自底向上迭代。
-4.链表题目很多时候添加一个空的头结点会方便很多。
-5.双指针甚至多指针也是一种记忆化,很多时候可以对空间复杂度进行进一步优化
+1.注意中间状态和最终状态的关系，如果能直接到达最终状态显然可以极大的降低算法的成本。比如直接推导出通项公式。<br/>
+2.对于暴力算法复杂度超过$O(n^2)$的题目，可以考虑是否可以先排序，因为排序的时间复杂度为O$(nlogn)$。<br/>
+3.动态规划其实是一种高级暴力算法，遇到暴力算法时间复杂度较高时候第一时间想到的就应该是有没有重复计算，能不能记忆化，能不能自底向上迭代。<br/>
+4.链表题目很多时候添加一个空的头结点会方便很多。<br/>
+5.双指针甚至多指针也是一种记忆化,很多时候可以对空间复杂度进行进一步优化<br/>
 ##作业部分
 ### 旋转数组
 #### 1.临时数组
-使用一个临时数组存储，时间复杂度$O(n)$,空间复杂度$O(n)$
-但是这个代码比较清晰，实际工程可以使用这种方式
+使用一个临时数组存储，时间复杂度$O(n)$,空间复杂度$O(n)$<br/>
+但是这个代码比较清晰，实际工程可以使用这种方式<br/>
 ```java
 public class SolutionTempArray {
     public void rotate(int[] nums, int k) {
@@ -53,7 +53,7 @@ public class SolutionReverse {
 
 ```
 #### 3.双端队列
-用一个双端队列来进行移动
+用一个双端队列来进行移动<br/>
 时间复杂度也是$O(n)$，虽然使用了辅助队列造成了$O(n)$的空间复杂度，但是在工程中这种问题明显**在最开始建模的时候就应该使用双端队列而不是数组**
 ```java
 import java.util.*;
@@ -103,12 +103,12 @@ public class SolutionCycSwap {
 ###接雨水
 非常不错的题目啊
 ####1.按行计算
-假设height数组的最大值为m，则时间复杂度为$O(m*n)$。
-乍看上去和按列计算没多大区别,但
-n == height.length
-0 <= n <= 3 * 104
-0 <= height[i] <= 105
-m的值更大。按行计算无法通过最后一个测试用例，超出时间限制
+假设height数组的最大值为m，则时间复杂度为$O(m*n)$。<br/>
+乍看上去和按列计算没多大区别,但<br/>
+n == height.length<br/>
+0 <= n <= 3 * 104<br/>
+0 <= height[i] <= 105<br/>
+m的值更大。按行计算无法通过最后一个测试用例，超出时间限制<br/>
 ```java
 class Solution {
         public int trap(int[] height) {
@@ -134,7 +134,7 @@ class Solution {
     }
 ```
 ####2.按列计算
-时间复杂度为$O(n^2)$,按列计算不仅时间复杂度略低于按行计算。而且可以进行多次优化！
+时间复杂度为$O(n^2)$,按列计算不仅时间复杂度略低于按行计算。而且可以进行多次优化！<br/>
 其根本原因在于:**height数组是按列分布的，根据位置找高度是$O(1)$复杂度，而根据高度查位置却是$O(n)$,牛排横切和纵切的难度自然是不同的！**
 ```java
 public class SolutionSumColumn {
@@ -192,16 +192,16 @@ public class SolutionDp {
 }
 ```
 ####4.双指针
-我们发现对于每一个max_left[n]和max_right[n]都是用过两次：
-1.求max_left[n+1]或者max_right[n-1]
-2.求接雨水的数量
-这说明DP算法的空间复杂度还有优化成常数的余地。
-这个算法理解的关键就是：
-1.maxLeftCurrent是从左到右更新，而maxRightCurrent是从又到左更新
-2.未更新部分的区间为(left,right),在这个范围内,因为是求最大值么,maxLeftCurrent和maxRightCurrent的值只可能比当前大，不可能比当前小。也就是如果n在区间(left,right)内，有maxLeftCurrent <= maxLeft[n] 和 maxRight[n]
-3.对于left节点maxLeftCurrent是等效与上面的max_left，而maxRightCurrent则不一定。反之亦然。
-4.如果maxLeftCurrent <= maxRightCurrent,那么根据 maxRightCurrent <= maxRight[n],根据不等式的传递性 maxLeftCurrent <= maxRight[n];反之maxLeftCurrent > maxRightCurrent则有maxRightCurrent >= maxLeft[n];
-5.根据上面算法,我们需要知道的是maxLeft和maxRight的最小值，而不是一定要直接确定这两个值那么根据4的结论,maxLeftCurrent <= maxRightCurrent时，可以根据maxLeftCurrent处理left节点,反之处理right节点。
+我们发现对于每一个max_left[n]和max_right[n]都是用过两次：<br/>
+1.求max_left[n+1]或者max_right[n-1]<br/>
+2.求接雨水的数量<br/>
+这说明DP算法的空间复杂度还有优化成常数的余地。<br/>
+这个算法理解的关键就是：<br/>
+1.maxLeftCurrent是从左到右更新，而maxRightCurrent是从又到左更新<br/>
+2.未更新部分的区间为(left,right),在这个范围内,因为是求最大值么,maxLeftCurrent和maxRightCurrent的值只可能比当前大，不可能比当前小。也就是如果n在区间(left,right)内，有maxLeftCurrent <= maxLeft[n] 和 maxRight[n]<br/>
+3.对于left节点maxLeftCurrent是等效与上面的max_left，而maxRightCurrent则不一定。反之亦然。<br/>
+4.如果maxLeftCurrent <= maxRightCurrent,那么根据 maxRightCurrent <= maxRight[n],根据不等式的传递性 maxLeftCurrent <= maxRight[n];反之maxLeftCurrent > maxRightCurrent则有maxRightCurrent >= maxLeft[n];<br/>
+5.根据上面算法,我们需要知道的是maxLeft和maxRight的最小值，而不是一定要直接确定这两个值那么根据4的结论,maxLeftCurrent <= maxRightCurrent时，可以根据maxLeftCurrent处理left节点,反之处理right节点。<br/>
 
 
 ```java
@@ -238,9 +238,9 @@ public class SolutionDoublePoint {
 
 ```
 ####5.栈
-反正我是想不出这方法...
-这个方法计算的是两根匹配柱子之间的水，一次计算一个矩形。
-https://leetcode-cn.com/problems/trapping-rain-water/solution/dan-diao-zhan-jie-jue-jie-yu-shui-wen-ti-by-sweeti/
+反正我是想不出这方法...<br/>
+这个方法计算的是两根匹配柱子之间的水，一次计算一个矩形。<br/>
+https://leetcode-cn.com/problems/trapping-rain-water/solution/dan-diao-zhan-jie-jue-jie-yu-shui-wen-ti-by-sweeti/<br/>
 说不清楚，直接粘贴别人题解
 
 ```java
