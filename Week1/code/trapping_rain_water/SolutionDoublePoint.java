@@ -5,23 +5,23 @@ public class SolutionDoublePoint {
         public int trap(int[] height) {
             if(height.length < 2) return 0;
             int sum = 0;
-            int max_left = 0;
-            int max_right = 0;
+            int maxLeftCurrent = 0;
+            int maxRightCurrent = 0;
             int left = 0;
             int right = height.length - 1;
             while( left <= right){
-                if(max_left <= max_right){
-                    if(max_left > height[left]){
-                        sum += (max_left-height[left]);
+                if(maxLeftCurrent <= maxRightCurrent){
+                    if(maxLeftCurrent > height[left]){
+                        sum += (maxLeftCurrent-height[left]);
                     }
-                    max_left = Math.max(max_left,height[left]);
+                    maxLeftCurrent = Math.max(maxLeftCurrent,height[left]);
                     left++;
                 }
                 else{
-                    if(max_right > height[right]){
-                        sum += (max_right - height[right]) ;
+                    if(maxRightCurrent > height[right]){
+                        sum += (maxRightCurrent - height[right]) ;
                     }
-                    max_right = Math.max(max_right, height[right]);
+                    maxRightCurrent = Math.max(maxRightCurrent, height[right]);
                     right--;
                 }
             }
